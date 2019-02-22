@@ -19,6 +19,7 @@ function populateForm() {
   }
   var target = document.getElementById('quantity');
   target.setAttribute('min', '1');
+
 }
 
 // When someone submits the form, we need to add the selected item to the cart
@@ -26,16 +27,15 @@ function populateForm() {
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
   event.preventDefault();
-  if(!event.target[2].value === '') {
+  if(event.target[2].value === '') {
     return;
   }
-debugger
   // Do all the things ...
   addSelectedItemToCart(event);
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview(event);
-
+  event.target.reset();
 }
 
 function addSelectedItemToCart(event) {

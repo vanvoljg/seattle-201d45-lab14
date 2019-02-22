@@ -16,28 +16,60 @@ function renderCart() {
   loadCart();
   clearCart();
   showCart();
+
+  //create for process order
 }
 
-// TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() {
+  var tbody = table.getElementsByTagName('tbody')[0];
+  tbody.innerHTML = '';
+}
 
-// TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
-  // TODO: Find the table body
+  var tbody = table.getElementsByTagName('tbody')[0];
+  var tr_el, td_el, img_el, a_el, span_el;
 
-  // TODO: Iterate over the items in the cart
-  // TODO: Create a TR
-  // TODO: Create a TD for the delete link, quantity,  and the item
-  // TODO: Add the TR to the TBODY and each of the TD's to the TR
+  for (var i in cart.items) {
+    tr_el = document.createElement('tr');
 
+    td_el = document.createElement('td');
+
+    a_el = document.createElement('a');
+    a_el.href = '#';
+    a_el.name = i;
+    a_el.textContent = 'X';
+    td_el.appendChild(a_el);
+    tr_el.appendChild(td_el);
+
+    td_el = document.createElement('td');
+    td_el.textContent = cart.items[i].quantity;
+    tr_el.appendChild(td_el);
+
+    td_el = document.createElement('td');
+    img_el = document.createElement('img');
+    img_el.src = cart.items[i].product.filePath;
+    td_el.appendChild(img_el);
+
+    span_el = document.createElement('span');
+    span_el.textContent = cart.items[i].product.name;
+    td_el.appendChild(span_el);
+    tr_el.appendChild(td_el);
+    tbody.appendChild(tr_el);
+  }
 }
 
 function removeItemFromCart(event) {
 
+  // make list of 
+  if (event.target.tagname !== 'A') return;
+  cart.removeItem(event.target.name);
+  // for (var i in cart.items)
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
   // TODO: Save the cart back to local storage
   // TODO: Re-draw the cart table
+  renderCart();
+  cart.saveToLocalStorage();
 
 }
 
