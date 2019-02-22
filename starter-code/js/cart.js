@@ -61,15 +61,10 @@ function showCart() {
 
 function removeItemFromCart(event) {
 
-  // make list of 
-  if (event.target.tagname !== 'A') return;
-  cart.removeItem(event.target.name);
-  // for (var i in cart.items)
-  // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
-  // TODO: Save the cart back to local storage
-  // TODO: Re-draw the cart table
-  renderCart();
+  if (event.target.tagName !== 'A') return;
+  cart.removeItem(parseInt(event.target.name));
   cart.saveToLocalStorage();
+  renderCart();
 
 }
 
